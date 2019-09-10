@@ -24,8 +24,9 @@ hs_err_pid*
 
 .idea/
 target/
+
+
 **/resources/build/.dot
 *.iml
 **/.DS_Store
 .DS_Store
-*.iml

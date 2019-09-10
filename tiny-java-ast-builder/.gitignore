@@ -1,3 +1,6 @@
+.classpath
+.project
+.settings/
 # Compiled class file
 *.class
 
@@ -24,8 +27,7 @@ hs_err_pid*
 
 .idea/
 target/
-**/resources/build/.dot
-*.iml
-**/.DS_Store
-.DS_Store
+
+src/main/resources/build/
+!src/main/resources/build/.gitkeep
 *.iml

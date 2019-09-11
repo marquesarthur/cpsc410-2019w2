@@ -7,6 +7,19 @@ import cs.ubc.ca.parser.Node;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <pre>
+ * Class that represents a ShapeNode in the AST representation of the DSL.
+ * A ShapeNode matches the expression:
+ *
+ *      shape_node ::= 'make' 'me' 'a' shape_type 'called' identifier 'please'
+ *      shape_type ::= circle | square
+ *      identifier ::= [_A-Za-z]+([A-Za-z0-9]*)
+ *
+ * </pre>
+ *
+ * @author Arthur Marques
+ */
 public class ShapeNode extends Node {
 
     private List<String> expression;
@@ -19,7 +32,12 @@ public class ShapeNode extends Node {
         this.shape = new Shape();
     }
 
-
+    /**
+     * Parses the content of a tokenizer generating the current shape node.
+     * Shape node has no children.
+     *
+     * @param context
+     */
     @Override
     public void parse(Tokenizer context) {
         int currentLine = context.getLine();
@@ -40,12 +58,12 @@ public class ShapeNode extends Node {
         }
     }
 
+    public Shape getShape() {
+        return this.shape;
+    }
+
     @Override
     public void compile() {
         writer.println(shape.toDigraph());
-    }
-
-    public Shape getShape() {
-        return this.shape;
     }
 }

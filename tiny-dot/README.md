@@ -17,6 +17,10 @@ I did not dedicate many hours to this project. I do apologize if something is no
 
 The next sections detail some of the core classes and methods about the project.
 
+## Documenation
+
+Run `mvn javadoc:javadoc` to check the project documentation at `tiny-dot/target/site/apidocs`
+
 ## DotProgram
 
 It's the core class of our DSL. It contains methods for parsing and compile a source file into a target `dot` program. 

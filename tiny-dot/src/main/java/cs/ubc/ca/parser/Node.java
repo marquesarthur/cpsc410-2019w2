@@ -9,18 +9,35 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract class that represents a Node in the AST representation of a DSL.
+ *
+ * Classes that inherit from Node must provide a list of terminals and non-terminals that are interpreted at parse time.
+ *
+ * At compile time, child classes convert their respective data structures to a digraph format and write that to the defined output writer.
+ *
+ * @author Arthur Marques
+ */
 public abstract class Node {
 
     static protected PrintWriter writer;
 
-    protected List<Node> children;
-
     protected String target;
 
+    protected List<Node> children;
 
     public Node() {
         this.children = new ArrayList<>();
     }
+
+    abstract public void compile();
+
+    /**
+     * Parses the content of a tokenizer generating the current node as well as child nodes
+     *
+     * @param context
+     */
+    abstract public void parse(Tokenizer context);
 
     public Node root() {
         return this;
@@ -30,10 +47,11 @@ public abstract class Node {
         return this.children;
     }
 
-    boolean hasChildren() {
-        return this.children.isEmpty();
-    }
-
+    /**
+     * Method to generate the .dot program output at a target path location
+     *
+     * @return the path for the target program
+     */
     public String getTarget() {
         try {
             URI resourcePathFile = System.class.getResource(this.target).toURI();
@@ -50,8 +68,4 @@ public abstract class Node {
     public void setTarget(String target) {
         this.target = target;
     }
-
-    abstract public void parse(Tokenizer context);
-
-    abstract public void compile();
 }

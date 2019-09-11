@@ -7,6 +7,18 @@ import cs.ubc.ca.errors.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <pre>
+ * Class that represents an EdgeNode in the AST representation of the DSL.
+ * An EdgeNode matches the expression:
+ *
+ *      edge_node ::= 'connect' identifier 'to' identifier
+ *      identifier ::= [_A-Za-z]+([A-Za-z0-9]*)
+ *
+ * </pre>
+ *
+ * @author Arthur Marques
+ */
 public class EdgeNode extends Node {
 
     private List<String> expression;
@@ -19,7 +31,12 @@ public class EdgeNode extends Node {
         this.edge = new Edge();
     }
 
-
+    /**
+     * Parses the content of a tokenizer generating the current edge node.
+     * Edge node has no children.
+     *
+     * @param context
+     */
     @Override
     public void parse(Tokenizer context) {
         int currentLine = context.getLine();

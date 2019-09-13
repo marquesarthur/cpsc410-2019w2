@@ -48,6 +48,7 @@ public class DotProgramTest {
             }
         }
         assertEquals(ProgramOutputStatus.SUCCESS, output.getStatus());
+        OutputWriter.tearDown();
     }
 
     @Test

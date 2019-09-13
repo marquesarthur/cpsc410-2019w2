@@ -1,9 +1,10 @@
 package cs.ubc.ca.parser;
 
 import cs.ubc.ca.ast.Shape;
+import cs.ubc.ca.dsl.OutputWriter;
 import cs.ubc.ca.errors.ParseException;
-import cs.ubc.ca.parser.Node;
 
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,10 +45,10 @@ public class ShapeNode extends Node {
         for (String exp : this.expression) {
             String token = context.pop();
             if (token == null) {
-                throw new ParseException(String.format("Invalid token at line %s.\nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
+                throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
             if (!token.matches(exp)) {
-                throw new ParseException(String.format("Invalid token at line %s.\nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
+                throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
             if (token.matches(Tokens.SHAPE)) {
                 this.shape.setGeoShape(token);
@@ -64,6 +65,7 @@ public class ShapeNode extends Node {
 
     @Override
     public void compile() {
+        PrintWriter writer = OutputWriter.getInstance().getWriter();
         writer.println(shape.toDigraph());
     }
 }

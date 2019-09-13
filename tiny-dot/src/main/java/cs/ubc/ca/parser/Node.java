@@ -20,15 +20,9 @@ import java.util.List;
  */
 public abstract class Node {
 
-    static protected PrintWriter writer;
-
     protected String target;
 
     protected List<Node> children;
-
-    public Node() {
-        this.children = new ArrayList<>();
-    }
 
     abstract public void compile();
 
@@ -38,6 +32,10 @@ public abstract class Node {
      * @param context
      */
     abstract public void parse(Tokenizer context);
+
+    public Node() {
+        this.children = new ArrayList<>();
+    }
 
     public Node root() {
         return this;
@@ -68,4 +66,5 @@ public abstract class Node {
     public void setTarget(String target) {
         this.target = target;
     }
+
 }

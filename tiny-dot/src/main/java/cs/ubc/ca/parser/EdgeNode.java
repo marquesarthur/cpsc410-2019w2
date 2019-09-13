@@ -2,8 +2,10 @@ package cs.ubc.ca.parser;
 
 
 import cs.ubc.ca.ast.Edge;
+import cs.ubc.ca.dsl.OutputWriter;
 import cs.ubc.ca.errors.ParseException;
 
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,10 +45,10 @@ public class EdgeNode extends Node {
         for (String exp: this.expression){
             String token = context.pop();
             if (token == null) {
-                throw new ParseException(String.format("Invalid token at line %s.\nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
+                throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
             if (!token.matches(exp)){
-                throw new ParseException(String.format("\"Invalid token at line %s.\nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
+                throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
             if (exp.equals(Tokens.IDENTIFIER) && token.matches(Tokens.IDENTIFIER)) {
                 this.edge.connect(token);
@@ -60,6 +62,7 @@ public class EdgeNode extends Node {
 
     @Override
     public void compile() {
+        PrintWriter writer = OutputWriter.getInstance().getWriter();
         writer.println(edge.toDigraph());
     }
 }

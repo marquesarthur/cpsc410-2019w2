@@ -19,8 +19,6 @@ public class DotProgram implements IProgram {
 
     private final String source;
 
-    private Node parser;
-
     private Node ast;
 
     private SymbolTable symbols;
@@ -34,9 +32,9 @@ public class DotProgram implements IProgram {
     public ProgramOutput parse() {
         try {
             Tokenizer ctx = new Tokenizer(source);
-            this.parser = new DigraphNode();
-            this.parser.parse(ctx);
-            this.ast = this.parser.root();
+            Node parser = new DigraphNode();
+            parser.parse(ctx);
+            this.ast = parser.root();
 
             this.symbols = new SymbolTable();
 

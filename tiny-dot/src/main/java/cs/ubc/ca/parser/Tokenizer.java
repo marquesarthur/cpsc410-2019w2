@@ -2,7 +2,6 @@ package cs.ubc.ca.parser;
 
 import cs.ubc.ca.errors.ParseException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +22,7 @@ import java.util.stream.Stream;
  */
 public class Tokenizer {
 
-    private static String program;
+    private String program;
 
     private String[] tokens;
 

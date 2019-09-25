@@ -15,7 +15,7 @@ describe('DSL should be able to parse several files', () => {
     it('should parse a valid input', async () => {
         let dotProgram = new DotProgram("valid/sample.tdot");
         let output = dotProgram.parse();
-        expect(output).to.be.equal(ProgramOutputStatus.SUCCESS)
+        expect(output.status).to.be.equal(ProgramOutputStatus.SUCCESS)
     });
 
 });

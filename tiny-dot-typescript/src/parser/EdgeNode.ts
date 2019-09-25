@@ -5,15 +5,15 @@ import Tokens from "./Tokens";
 import Shape from "../ast/Shape";
 import Edge from "../ast/Edge";
 
-export default class DigraphNode extends Node {
+export default class EdgeNode extends Node {
 
-    expression: string[] = [Tokens.MAKE, Tokens.ME, Tokens.A, Tokens.SHAPE, Tokens.CALLED, Tokens.IDENTIFIER, Tokens.PLEASE];
+    expression: string[] = [Tokens.CONNECT, Tokens.IDENTIFIER, Tokens.TO, Tokens.IDENTIFIER];
 
-    shape: Shape;
+    edge: Edge;
 
     constructor() {
         super();
-        this.shape = new Shape();
+        this.edge = new Edge();
     }
 
     public parse(context: Tokenizer) {
@@ -26,11 +26,9 @@ export default class DigraphNode extends Node {
             if (!token.match(exp)) {
                 throw new ParserError("Invalid token at line ${currentLine}. Parser was expecting: [${exp}] and received: [${token}] instead");
             }
-            if (token.match(Tokens.SHAPE)) {
-                this.shape.geoShape = token;
-            }
+
             if (exp == Tokens.IDENTIFIER && token.match(Tokens.IDENTIFIER)) {
-                this.shape.name = token;
+                this.edge.connect(token);
             }
         }
     }

@@ -13,4 +13,8 @@ export abstract class Node {
     constructor() {
         this.children = [];
     }
+
+    public getChildren(): Array<Node> {
+        return this.children;
+    }
 }

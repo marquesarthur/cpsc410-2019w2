@@ -5,6 +5,7 @@ import Tokenizer from "../parser/Tokenizer";
 import {Node} from "../parser/Node";
 import DigraphNode from "../parser/DigraphNode";
 import SymbolTable from "../parser/SymbolTable";
+import AstVisitor from "../ast/AstVisitor";
 
 export class DotProgram implements IProgram {
 
@@ -22,6 +23,13 @@ export class DotProgram implements IProgram {
             let node = new DigraphNode();
             node.parse(ctx);
             this.ast = node.root();
+
+            this.symbolTable = new SymbolTable();
+
+            let visitor = new AstVisitor(this.ast);
+            visitor.addListener(this.symbolTable);
+            visitor.traverse();
+
             return new ProgramOutput(ProgramOutputStatus.SUCCESS, this.ast, this.symbolTable, []);
         } catch(err) {
             return new ProgramOutput(ProgramOutputStatus.ERROR, this.ast, this.symbolTable, []);

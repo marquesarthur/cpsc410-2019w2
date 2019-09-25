@@ -36,8 +36,8 @@ export default class DigraphNode extends Node {
         let shapes = nodes.filter(n => n instanceof ShapeNode);
         let edges = nodes.filter(n => n instanceof EdgeNode);
 
-        this.children.concat(shapes);
-        this.children.concat(edges);
+        this.children = this.children.concat(shapes);
+        this.children = this.children.concat(edges);
     }
 
 

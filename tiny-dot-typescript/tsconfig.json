@@ -1,14 +1,8 @@
 {
-  "sourceMap": true,
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "types": ["mocha"],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "sourceMap": true,
+    "module": "commonjs"
   },
   "include": [
     "src/**/*.ts"
@@ -21,6 +15,5 @@
     "webpack",
     "jest",
     "src/setupTests.ts"
-  ],
-
+  ]
 }

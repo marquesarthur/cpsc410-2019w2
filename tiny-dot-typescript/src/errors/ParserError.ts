@@ -1,4 +1,4 @@
-export class CompileError extends Error {
+export class ParserError extends Error {
     constructor(message: string) {
         super(message);
     }

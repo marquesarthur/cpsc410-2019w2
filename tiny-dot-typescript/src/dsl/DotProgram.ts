@@ -1,15 +1,17 @@
 import IProgram from './IProgram';
 import ProgramOutput from "./ProgramOutput";
+import Tokenizer from "../parser/Tokenizer";
 
 export class DotProgram implements IProgram {
 
-    source: String;
+    source: string;
 
-    constructor(source: String){
+    constructor(source: string){
         this.source = source;
     }
 
     public parse(): ProgramOutput {
+        let ctx = new Tokenizer(this.source);
         return null;
     }
 
@@ -17,7 +19,7 @@ export class DotProgram implements IProgram {
         return null;
     }
 
-    public getTarget(): String {
+    public getTarget(): string {
         return null;
     }
 }

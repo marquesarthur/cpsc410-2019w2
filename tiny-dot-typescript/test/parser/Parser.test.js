@@ -20,5 +20,28 @@ describe('DSL should be able to parse several files', () => {
         let output = dotProgram.parse();
         expect(output.status).to.be.equal(ProgramOutput_1.ProgramOutputStatus.SUCCESS);
     }));
+    it('should parse a valid simple input', () => __awaiter(this, void 0, void 0, function* () {
+        let dotProgram = new DotProgram_1.DotProgram("valid/simple.tdot");
+        let output = dotProgram.parse();
+        expect(output.status).to.be.equal(ProgramOutput_1.ProgramOutputStatus.SUCCESS);
+    }));
+    it('should not parse a non existing file', () => __awaiter(this, void 0, void 0, function* () {
+        let dotProgram = new DotProgram_1.DotProgram("sample.tdot");
+        let output = dotProgram.parse();
+        expect(output.status).to.be.equal(ProgramOutput_1.ProgramOutputStatus.ERROR);
+    }));
+    it('should not parse a valid input', () => __awaiter(this, void 0, void 0, function* () {
+        const invalidInputs = [
+            "invalid/non.valid.shape.tdot",
+            "invalid/incomplete.shape.missing.shape.tdot",
+            "invalid/incomplete.shape.missing.identifier.tdot",
+            "invalid/incomplete.shape.missing.please.tdot"
+        ];
+        for (let input of invalidInputs) {
+            let dotProgram = new DotProgram_1.DotProgram(input);
+            let output = dotProgram.parse();
+            expect(output.status).to.be.equal(ProgramOutput_1.ProgramOutputStatus.ERROR);
+        }
+    }));
 });
 //# sourceMappingURL=Parser.test.js.map

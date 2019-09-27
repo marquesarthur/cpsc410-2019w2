@@ -2,6 +2,7 @@ import * as chai from 'chai';
 import * as fs from 'fs';
 
 import {DotProgram} from '../../src/dsl/DotProgram';
+import {OutputWriter} from '../../src/dsl/OutputWriter';
 import ProgramOutput, {ProgramOutputStatus} from '../../src/dsl/ProgramOutput';
 import * as path from "path";
 
@@ -39,6 +40,7 @@ describe('DSL should be able to compile', () => {
         let outputString = load("valid/output/sample.dot");
         expect(output.status).to.be.equal(ProgramOutputStatus.SUCCESS);
         expect(fs.readFileSync(dotProgram.targetPath()).toString('utf-8')).to.be.equal(outputString);
+        OutputWriter.tearDown();
     });
 
     it('should compile Fido Biff input', async () => {
@@ -47,7 +49,8 @@ describe('DSL should be able to compile', () => {
         let output = compile(dotProgram);
         let outputString = load("valid/output/FidoBiff.dot");
         expect(output.status).to.be.equal(ProgramOutputStatus.SUCCESS);
-        expect(dotProgram.targetPath()).to.be.equal(outputString);
+        expect(fs.readFileSync(dotProgram.targetPath()).toString('utf-8')).to.be.equal(outputString);
+        OutputWriter.tearDown();
     });
 
     it('should compile FooBar input', async () => {
@@ -56,7 +59,8 @@ describe('DSL should be able to compile', () => {
         let output = compile(dotProgram);
         let outputString = load("valid/output/FooBar.dot");
         expect(output.status).to.be.equal(ProgramOutputStatus.SUCCESS);
-        expect(dotProgram.targetPath()).to.be.equal(outputString);
+        expect(fs.readFileSync(dotProgram.targetPath()).toString('utf-8')).to.be.equal(outputString);
+        OutputWriter.tearDown();
     });
 
     it('should compile LifeUniverseAndEverythingElse input', async () => {
@@ -65,6 +69,7 @@ describe('DSL should be able to compile', () => {
         let output = compile(dotProgram);
         let outputString = load("valid/output/LifeUniverseAndEverythingElse.dot");
         expect(output.status).to.be.equal(ProgramOutputStatus.SUCCESS);
-        expect(dotProgram.targetPath()).to.be.equal(outputString);
+        expect(fs.readFileSync(dotProgram.targetPath()).toString('utf-8')).to.be.equal(outputString);
+        OutputWriter.tearDown();
     });
 });

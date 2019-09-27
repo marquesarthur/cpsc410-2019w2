@@ -8,7 +8,7 @@ export default class Edge {
     }
 
     public connect(token: string) {
-        if (this.a === null) {
+        if (this.a == null) {
             this.a = token;
         } else {
             this.b = token;
@@ -18,6 +18,6 @@ export default class Edge {
     public toDigraph(): string {
         let a = this.a;
         let b = this.b;
-        return "${a}->${b}\n";
+        return `${a}->${b}\n`;
     }
 }

@@ -21,5 +21,4 @@ export default class ProgramOutput {
         this.symbolTable = symbolTable;
         this.errors = errors;
     }
-
 }

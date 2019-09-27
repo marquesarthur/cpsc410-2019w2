@@ -4,6 +4,7 @@ import {ParserError} from '../errors/ParserError';
 import Tokens from "./Tokens";
 import Shape from "../ast/Shape";
 import Edge from "../ast/Edge";
+import {OutputWriter} from "../dsl/OutputWriter";
 
 export default class EdgeNode extends Node {
 
@@ -35,22 +36,8 @@ export default class EdgeNode extends Node {
 
 
     public compile() {
-        // final String fileName = this.target;
-        // final String encoding = "UTF-8";
-        // final String START = "digraph G {" + System.lineSeparator();
-        // final String END = "}";
-        // try {
-        //     File file = new File(fileName);
-        //     PrintWriter writer = OutputWriter.getInstance(file, encoding).getWriter();
-        //     writer.println(START);
-        //     children.forEach(Node::compile);
-        //     writer.println(END);
-        //     writer.close();
-        // } catch (FileNotFoundException e) {
-        //     throw new TransformationException(String.format("File not found: [%s]", fileName), e);
-        // } catch (UnsupportedEncodingException e) {
-        //     throw new TransformationException(String.format("Unsuported enconding: [%s]", encoding), e);
-        // }
+        let writer = OutputWriter.getWriter();
+        writer.write(this.edge.toDigraph());
     }
 
 

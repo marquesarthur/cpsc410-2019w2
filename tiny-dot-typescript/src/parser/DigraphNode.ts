@@ -4,7 +4,8 @@ import {ParserError} from '../errors/ParserError';
 import Tokens from "./Tokens";
 import ShapeNode from "./ShapeNode";
 import EdgeNode from "./EdgeNode";
-
+import {CompileError} from "../errors/CompileError";
+import {OutputWriter} from "../dsl/OutputWriter";
 
 export default class DigraphNode extends Node {
 
@@ -42,22 +43,19 @@ export default class DigraphNode extends Node {
 
 
     public compile() {
-        // final String fileName = this.target;
-        // final String encoding = "UTF-8";
-        // final String START = "digraph G {" + System.lineSeparator();
-        // final String END = "}";
-        // try {
-        //     File file = new File(fileName);
-        //     PrintWriter writer = OutputWriter.getInstance(file, encoding).getWriter();
-        //     writer.println(START);
-        //     children.forEach(Node::compile);
-        //     writer.println(END);
-        //     writer.close();
-        // } catch (FileNotFoundException e) {
-        //     throw new TransformationException(String.format("File not found: [%s]", fileName), e);
-        // } catch (UnsupportedEncodingException e) {
-        //     throw new TransformationException(String.format("Unsuported enconding: [%s]", encoding), e);
-        // }
+        try {
+            let file = this.target;
+            let writer = OutputWriter.getInstance(file, 'utf-8');
+
+            writer.write("digraph G {\n");
+            this.children.forEach((node) => {
+                node.compile()
+            });
+            writer.write("}");
+            writer.flush();
+        } catch (err) {
+            throw new CompileError(err.message);
+        }
     }
 
     public root(): Node {

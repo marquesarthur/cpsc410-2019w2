@@ -10,6 +10,6 @@ export default class Shape {
     public toDigraph() {
         let name = this.name;
         let geo = this.geoShape;
-        return "%s[shape=%s]\n";
+        return `${name}[shape=${geo}]\n`;
     }
 }

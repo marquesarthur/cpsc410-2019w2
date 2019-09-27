@@ -1,9 +1,0 @@
-digraph G {
-
-Fido[shape=circle]
-
-Fido[shape=circle]
-
-Fido->Fido
-
-}

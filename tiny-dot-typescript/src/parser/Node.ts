@@ -17,4 +17,8 @@ export abstract class Node {
     public getChildren(): Array<Node> {
         return this.children;
     }
+
+    setTargetPath(path: string) {
+        this.target = path;
+    }
 }

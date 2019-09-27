@@ -6,7 +6,7 @@ import {ProgramOutputStatus} from '../../src/dsl/ProgramOutput';
 
 const expect = chai.expect;
 
-describe('DSL should be able to parse several files', () => {
+describe('DSL should be able to parse', () => {
 
     before(() => {
 

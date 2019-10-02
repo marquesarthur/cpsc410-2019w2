@@ -47,7 +47,7 @@ public class EdgeNode extends Node {
             if (token == null) {
                 throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
-            if (!token.matches(exp)){
+            if (!token.matches(exp)){ //checking
                 throw new ParseException(String.format("Invalid token at line %s.%nParser was expecting: [%s] and received: [%s] instead", currentLine, exp, token));
             }
             if (exp.equals(Tokens.IDENTIFIER) && token.matches(Tokens.IDENTIFIER)) {

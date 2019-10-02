@@ -1,5 +1,6 @@
 package cs.ubc.ca.dsl;
 
+import cs.ubc.ca.analysis.CircularListener;
 import cs.ubc.ca.analysis.ICompalible;
 import cs.ubc.ca.analysis.MissingDeclarationListener;
 import cs.ubc.ca.analysis.RedeclarationListener;
@@ -34,7 +35,7 @@ public class DotProgram implements IProgram {
             Tokenizer ctx = new Tokenizer(source);
             Node parser = new DigraphNode();
             parser.parse(ctx);
-            this.ast = parser.root();
+            this.ast = parser.root(); //similar until here
 
             this.symbols = new SymbolTable();
 
@@ -58,9 +59,12 @@ public class DotProgram implements IProgram {
             AstVisitor visitor = new AstVisitor(this.ast);
             MissingDeclarationListener missingDeclarationListener = new MissingDeclarationListener(this.symbols);
             RedeclarationListener redeclarationListener = new RedeclarationListener(this.symbols);
+            CircularListener circularListener = new CircularListener(this.symbols);
 
             visitor.addListener(missingDeclarationListener);
             visitor.addListener(redeclarationListener);
+            visitor.addListener(circularListener);
+
             visitor.traverse();
 
             this.ast.setTarget(this.getTarget());
@@ -69,6 +73,7 @@ public class DotProgram implements IProgram {
             ProgramOutput output = new ProgramOutput(ProgramOutputStatus.SUCCESS, this.ast, this.symbols, new ArrayList<>());
             this.checkCompileErrors(output, missingDeclarationListener);
             this.checkCompileErrors(output, redeclarationListener);
+            this.checkCompileErrors(output, circularListener);
 
             return output;
 

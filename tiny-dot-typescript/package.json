@@ -11,7 +11,7 @@
     "cover": "istanbul cover _mocha",
     "coverwin": "istanbul cover node_modules/mocha/bin/_mocha",
     "who": "node src/whoDidThat.js",
-    "email": "node src/email.js"
+    "email": "node src/main.js"
   },
   "devDependencies": {
     "@types/chai": "^4.0.8",

@@ -59,11 +59,9 @@ public class DotProgram implements IProgram {
             AstVisitor visitor = new AstVisitor(this.ast);
             MissingDeclarationListener missingDeclarationListener = new MissingDeclarationListener(this.symbols);
             RedeclarationListener redeclarationListener = new RedeclarationListener(this.symbols);
-            CircularListener circularListener = new CircularListener(this.symbols);
 
             visitor.addListener(missingDeclarationListener);
             visitor.addListener(redeclarationListener);
-            visitor.addListener(circularListener);
 
             visitor.traverse();
 
@@ -73,7 +71,6 @@ public class DotProgram implements IProgram {
             ProgramOutput output = new ProgramOutput(ProgramOutputStatus.SUCCESS, this.ast, this.symbols, new ArrayList<>());
             this.checkCompileErrors(output, missingDeclarationListener);
             this.checkCompileErrors(output, redeclarationListener);
-            this.checkCompileErrors(output, circularListener);
 
             return output;
 
